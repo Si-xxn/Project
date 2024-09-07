@@ -20,6 +20,18 @@
 		]]>
 	</select>
 	
+	<select id="findId" resultType="kr.co.librarylyh.domain.UserVO" >
+		<![CDATA[
+			select id from member_tbl where id = #{id}
+		]]>
+	</select>
+	
+	<select id="findPassword" resultType="kr.co.librarylyh.domain.UserVO" >
+		<![CDATA[
+			select * from member_tbl where id = #{id} and phone = #{phone}
+		]]>
+	</select>
+	
 	<update id="update">
 		<![CDATA[
 			update member_tbl set name = #{name}, phone = #{phone}, email = #{email}, pw = #{pw} where u_id = #{u_id}

@@ -83,6 +83,19 @@ public class UserMapperTests {
 		// INFO  kr.co.librarylyh.mapper.UserMapperTests(testLogin81) - 테스트3로그인 성공	}
 	}
 	
+	@Test
+	public void testFindId() {
+		mapper.findId("test333");
+	}
 	
+	@Test
+	public void testFindPassword() {
+		UserVO user = new UserVO();
+		
+		user.setId("test333");
+		user.setPhone("010-1234-9876");
+		user = mapper.findPassword(user);
+		log.info(user);
+	}
 	
 }

@@ -1,26 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>Course</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Course Project">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="/resources/styles/bootstrap4/bootstrap.min.css">
-<link href="/resources/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="/resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-<link rel="stylesheet" type="text/css" href="/resources/plugins/OwlCarousel2-2.2.1/animate.css">
-<link rel="stylesheet" type="text/css" href="/resources/styles/main_styles.css">
-<link rel="stylesheet" type="text/css" href="/resources/styles/responsive.css">
-</head>
-<body>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <!-- JSTL 코어 태그 -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> <!-- JSTL 포매팅 태그 -->   
+<%@ include file="../includes/header.jsp" %>
 
-<div class="super_container">
-
-	<%@ include file="../includes/header.jsp" %>
 	
 	<!-- Home -->
 
@@ -61,8 +44,8 @@
 
 			</div>
 
-			<div class="hero_slider_left hero_slider_nav trans_200"><span class="trans_200">prev</span></div>
-			<div class="hero_slider_right hero_slider_nav trans_200"><span class="trans_200">next</span></div>
+			<div class="hero_slider_left hero_slider_nav trans_200"><span class="trans_200"> <- </span></div>
+			<div class="hero_slider_right hero_slider_nav trans_200"><span class="trans_200"> -> </span></div>
 		</div>
 
 	</div>
@@ -94,9 +77,9 @@
 
 					<div class="col-lg-4 hero_box_col">
 						<div class="hero_box d-flex flex-row align-items-center justify-content-start">
-							<img src="/resources/images/professor.svg" class="svg" alt="">
+							<img src="/resources/images/member.png" class="svg" alt="">
 							<div class="hero_box_content">
-								<h2 class="hero_box_title">Our Teachers</h2>
+								<h2 class="hero_box_title">도서 대출</h2>
 								<a href="teachers.html" class="hero_box_link">view more</a>
 							</div>
 						</div>
@@ -114,7 +97,7 @@
 			<div class="row">
 				<div class="col">
 					<div class="section_title text-center">
-						<h1>Popular Courses</h1>
+						<img class="bestseller" src="/resources/images/bestseller.png"><h1>Best-Seller</h1>
 					</div>
 				</div>
 			</div>
@@ -477,36 +460,7 @@
 		</div>
 	</div>
 
-	<!-- Footer -->
-
-	<!-- <footer class="footer">
-		<div class="container">
-			
-			Newsletter
-
-			<div class="newsletter">
-				<div class="row">
-					<div class="col">
-						<div class="section_title text-center">
-							<h1>Subscribe to newsletter</h1>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col text-center">
-						<div class="newsletter_form_container mx-auto">
-							<form action="post">
-								<div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-center">
-									<input id="newsletter_email" class="newsletter_email" type="email" placeholder="Email Address" required="required" data-error="Valid email is required.">
-									<button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">Subscribe</button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-
-			</div> -->
+	
 
 <%@ include file="../includes/footer.jsp" %>		 	
 </body>

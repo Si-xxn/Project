@@ -1,6 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>    
 <!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Course</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Course Project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/resources/styles/bootstrap4/bootstrap.min.css">
+<link href="/resources/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="/resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="/resources/plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" type="text/css" href="/resources/styles/main_styles.css">
+<link rel="stylesheet" type="text/css" href="/resources/styles/responsive.css">
+</head>
+<body>
+
+<div class="super_container">
+
 <!-- Header -->
 
 	<header class="header d-flex flex-row">
@@ -8,8 +29,8 @@
 			<!-- Logo -->
 			<div class="logo_container">
 				<div class="logo">
-					<img src="/resources/images/logo.png">
-					<span>course</span>
+					<img src="/resources/images/book_log.png">
+					<span><a href="/library/home" >Booklipse</a></span>
 				</div>
 			</div>
 
@@ -17,19 +38,27 @@
 			<nav class="main_nav_container">
 				<div class="main_nav">
 					<ul class="main_nav_list">
-						<li class="main_nav_item"><a href="#">전체 카테고리</a></li>
 						<li class="main_nav_item"><a href="#">국내도서</a></li>
 						<li class="main_nav_item"><a href="courses.html">베스트</a></li>
 						<li class="main_nav_item"><a href="elements.html">신상품</a></li>
-						<li class="main_nav_item"><a href="news.html">추천</a></li>
-						<li class="main_nav_item"><a href="contact.html">도서대여</a></li>
+						<li class="main_nav_item"><a href="news.html">도서대여</a></li>
+						<li class="main_nav_item"><a href="/library/list.jsp">게시판</a></li>
 					</ul>
 				</div>
 			</nav>
 		</div>
 		<div class="header_side d-flex flex-row justify-content-center align-items-center">
-			<img src="/resources/images/phone-call.svg" alt="">
-			<span>+43 4566 7788 2457</span>
+			<!-- <img src="/resources/images/profile.svg"> -->
+		<span>
+			<c:choose>
+				<c:when test="${cookie.loginUser.value eq null}" >
+					<a href="<c:url value='/library/login' />">로그인</a>
+				</c:when>
+				<c:otherwise>
+					<a href="<c:url value='/library/logoutForm'/>" >로그아웃</a>
+				</c:otherwise>
+			</c:choose>
+		</span>
 		</div>
 
 		<!-- Hamburger -->

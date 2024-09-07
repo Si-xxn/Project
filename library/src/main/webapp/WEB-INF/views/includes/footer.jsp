@@ -1,6 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<!-- Footer -->
+
+	 <footer class="footer">
+		<div class="container">
+<!--			<div class="newsletter">
+ 				<div class="row">
+					<div class="col">
+						<div class="section_title text-center">
+							<h1>Search for Books!</h1>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col text-center">
+						<div class="newsletter_form_container mx-auto">
+							<form action="post">
+								<div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-center">
+									<input id="newsletter_email" class="newsletter_email" type="email" placeholder="Email Address" required="required" data-error="Valid email is required.">
+									<button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">Subscribe</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div> 
+
+			</div> -->
 <!-- Footer Content -->
 
 			<div class="footer_content">
@@ -100,6 +127,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</footer>
 
 </div>
+
 
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <script src="/resources/styles/bootstrap4/popper.js"></script>

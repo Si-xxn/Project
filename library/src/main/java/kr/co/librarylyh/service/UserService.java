@@ -10,7 +10,7 @@ public interface UserService {
 	// 메서드에 실제 용어 사용
 	
 	// 회원가입
-	public void register(UserVO user);
+	public int register(UserVO user);
 	
 	// 정보수정
 	public boolean modify(UserVO user);
@@ -23,5 +23,9 @@ public interface UserService {
 	
 	// 회원 로그인
 	public UserVO login(UserVO user);
+	
+	public boolean findId(String id);
+	
+	public int findPassword(UserVO user);
 
 }
