@@ -1,11 +1,13 @@
 package kr.co.librarylyh.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.librarylyh.domain.UserVO;
 import lombok.Setter;
@@ -32,7 +34,7 @@ public class UserMapperTests {
 		user.setPw("mapper123");
 		user.setNickName("mapperTest");
 		
-		mapper.insertSelectUid(user);
+		mapper.join(user);
 		
 		log.info("결과 : " + user);
 		//  INFO  kr.co.librarylyh.mapper.UserMapperTests(testInsertSelectUid37) - 결과 : UserVO(u_id=M6P9FTCP6U, name=mapper, birth=990201, phone=010-9876-5432, email=library1@naver.com, id=mapper, pw=mapper123, nickName=mapperTest)
@@ -73,10 +75,11 @@ public class UserMapperTests {
 	@Test
 	public void testLogin() {
 		UserVO user = new UserVO();
-		user.setId("test333");
-		user.setPw("test333");
+		String id = "test555";
+		String pw = "test55";
 		
-		user = mapper.login(user);
+		user = mapper.login(id, pw);
+		
 		log.info(user);
 		log.info(user.getName()+ "로그인 성공");
 		// INFO  kr.co.librarylyh.mapper.UserMapperTests(testLogin80) - UserVO(u_id=u_id, name=테스트3, birth=990103, phone=010-1234-9876, email=mbc3@naver.com, id=test333, pw=test333, nickName=tester3)

@@ -5,7 +5,7 @@
 <!-- xml를 활용한 공통코드 -->
 <!-- Mapper 인터페이스의 SQL 처리용 -->
 <mapper namespace="kr.co.librarylyh.mapper.UserMapper">
-	<insert id="insertSelectUid">
+	<insert id="join">
 	<selectKey keyProperty="u_id" order="BEFORE" resultType="String">
 		select dbms_random.String('X',10)u_id from dual 
 	</selectKey>	
@@ -16,7 +16,7 @@
 	
 	<select id="read" resultType="kr.co.librarylyh.domain.UserVO" >
 		<![CDATA[
-			select * from member_tbl where u_id = #{u_id}
+			select * from member_tbl where id = #{id}
 		]]>
 	</select>
 	

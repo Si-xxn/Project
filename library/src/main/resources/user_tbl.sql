@@ -18,3 +18,5 @@ select dbms_random.String('X',10)u_id from dual;
 insert into member_tbl(u_id, name, birth, phone, email, id, pw, nickName) values ('u_id','테스트3', '990103', '010-1234-9876', 'mbc3@naver.com', 'test333', 'test333', 'tester3');
 
 select * from MEMBER_TBL;
+
+select * from member_tbl where id = 'test555' and pw = 'test55';
