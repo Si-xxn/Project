@@ -1,13 +1,11 @@
 package kr.co.librarylyh.mapper;
 
-import org.apache.ibatis.annotations.Param;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.librarylyh.domain.UserVO;
 import lombok.Setter;
@@ -23,16 +21,16 @@ public class UserMapperTests {
 	private UserMapper mapper;
 	
 	@Test
-	public void testInsertSelectUid() {
+	public void testJoin() {
 		UserVO user = new UserVO();
 		
-		user.setName("mapper");
-		user.setBirth("990201");
-		user.setPhone("010-9876-5432");
-		user.setEmail("library1@naver.com");
-		user.setId("mapper");
-		user.setPw("mapper123");
-		user.setNickName("mapperTest");
+		user.setName("두두두");
+		user.setBirth("990913");
+		user.setPhone("010-9877-5522");
+		user.setEmail("library123@naver.com");
+		user.setId("dududu123");
+		user.setPw("dududu123");
+		user.setNickName("듀듀듀");
 		
 		mapper.join(user);
 		
@@ -72,13 +70,14 @@ public class UserMapperTests {
 		// INFO  kr.co.librarylyh.mapper.UserMapperTests(testDelete69) - 삭제 테스트 : 1
 	}
 	
+	
 	@Test
 	public void testLogin() {
 		UserVO user = new UserVO();
-		String id = "test555";
-		String pw = "test55";
+		user.setId("test555");
+		user.setPw("test55");
 		
-		user = mapper.login(id, pw);
+		user = mapper.login(user);
 		
 		log.info(user);
 		log.info(user.getName()+ "로그인 성공");
@@ -87,17 +86,42 @@ public class UserMapperTests {
 	}
 	
 	@Test
-	public void testFindId() {
-		mapper.findId("test333");
+	public void testIdCheck() {
+		
+		String id1 = "test555"; // 1
+		String id2 = "idCheck"; // 0
+		
+		mapper.idCheck(id1); // 존재하는 아이디
+		mapper.idCheck(id2); // 존재하지 않는 아이디
 	}
 	
 	@Test
-	public void testFindPassword() {
+	public void testNickNameCheck() {
+		String nick1 = "controller"; // 존재하는 닉네임
+		String nick2 = "abc"; // 존재하지 않는 닉네임
+		
+		mapper.nickNameCheck(nick1); // 1
+		mapper.nickNameCheck(nick2); // 0
+	}
+	
+	@Test
+	public void testgetList() {
+		mapper.getAdminList().forEach(user -> log.info(user));
+	}
+	
+	@Test
+	public void testAdminRegister() {
 		UserVO user = new UserVO();
 		
-		user.setId("test333");
-		user.setPhone("010-1234-9876");
-		user = mapper.findPassword(user);
+		user.setName("관리자");
+		user.setBirth("020103");
+		user.setEmail("admin123@gmail.com");
+		user.setId("admin111");
+		user.setPw("admin111");
+		user.setPhone("010-1234-0987");
+		user.setAuthority(1);
+		
+		mapper.admin(user);
 		log.info(user);
 	}
 	

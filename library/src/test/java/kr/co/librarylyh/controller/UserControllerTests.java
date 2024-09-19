@@ -36,11 +36,11 @@ public class UserControllerTests {
 	
 	@Test
 	public void testLogin() throws Exception {
-		String result = mockMvc.perform(MockMvcRequestBuilders.post("/login")
+		String result = mockMvc.perform(MockMvcRequestBuilders.post("/library/login")
 				.param("id", "test555")
 				.param("pw", "test55"))
 				.andReturn().getModelAndView().getViewName();
-		log.info(result);
+		log.info("결과 : " + result);
 	}
 	
 	@Test
@@ -55,6 +55,16 @@ public class UserControllerTests {
 				.param("nickName", "controller"))
 				.andReturn().getModelAndView().getViewName();
 		log.info(result);
+	}
+	
+	
+	@Test
+	public void testNickName() throws Exception {
+		String result = mockMvc.perform(MockMvcRequestBuilders.post("/library/nickNameCheck")
+				.param("nickName", "controller"))
+				.andReturn().getModelAndView().getViewName();
+		log.info(result);
+		
 	}
 	
 	@Test

@@ -84,10 +84,31 @@ public class UserServiceTests {
 	public void testLogin() {
 		UserVO user = new UserVO();
 		
-		String id = "test555";
-		String pw = "test55";
+		user.setId("test555");
+		user.setPw("test55");
 		
-		user = service.login(id, pw);
+		user = service.login(user);
 		log.info(user);
+	}
+	
+	@Test
+	public void testIdCheck() throws Exception {
+		String id = "test555";
+		service.idCheck(id); // 1반환
+	}
+	
+	@Test
+	public void testNickNameCheck() throws Exception {
+		String nick1 = "controller"; // 존재 O
+		String nick2 = "abc";		 // 존재 X
+		
+		service.nickNameCheck(nick1); // 1
+		service.nickNameCheck(nick2); // 0
+	}
+	
+	@Test
+	public void testAdmin() {
+		
+		service.getUserList().forEach(user -> log.info(user));
 	}
 }
