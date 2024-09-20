@@ -35,12 +35,26 @@ public interface UserMapper {
 	// 회원 로그인
 	public UserVO login(UserVO user);
 	
-	// 어드민 리스트 
-	public List<UserVO> getAdminList(); 
+	// 비밀번호 확인
+	public int checkPw(String id);
 	
-	// 회원 리스트
-//	public List<UserVO> getUserList();
+	// 비밀번호 변경
+	public int updatePw(String pw);
+	
+	// 유저 아이디 찾기
+	public UserVO findUserId(UserVO user);
+		
+	// 유저 비밀번호 찾기
+	public int findUserPw(UserVO user);
+	
+	// 비밀번호 업데이트
+	public int pwUpdate(UserVO user);
+	
+	// 어드민 리스트 
+	public List<UserVO> getUserList(int authority); 
 	
 	// 어드민 등록
-	public void admin(UserVO user);
+	public void adminRegister(UserVO user);
+	
+	
 }	

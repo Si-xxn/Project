@@ -26,7 +26,7 @@
                 <h1 class="myPage-title">내 정보</h1>
                 <span class="myPage-subject">원하는 회원 정보를 수정할 수 있습니다.</span>
 
-                <form action="info" method="POST" name="myPageFrm">
+                <form method="POST"  name="myPageFrm">
 
                     <div class="myPage-row">
                         <label>아이디</label>
@@ -36,30 +36,36 @@
                     
                     <div class="myPage-row">
                         <label>닉네임</label>
-                        <input type="text" name="nickName" 
-                            value="${user.nickName}">
+                        <input type="text" id="nickName" name="nickName" readonly="readonly"
+                            value="${user.nickName}" >
                     </div>
 
                     <div class="myPage-row">
                         <label>이름</label>
-                        <input type="text" name="name" 
+                        <input type="text" name="name" readonly="readonly"
                             value="${user.name}">
                     </div>
                     
                     <div class="myPage-row">
                         <label>생년월일</label>
-                        <input type="text" name="birth"  maxlength="11" 
+                        <input type="text" name="birth"  maxlength="11" readonly="readonly"
                             value="${user.birth}">
                     </div>
                     
                     <div class="myPage-row">
                         <label>전화번호</label>
-                        <input type="text" name="phone"  maxlength="11" 
+                        <input type="text" name="phone" id="phone" maxlength="11" readonly="readonly"
                             value="${user.phone}">
+                    </div>
+                    
+                    <div class="myPage-row">
+                        <label>이메일</label>
+                        <input type="text" id="email" name="email" readonly="readonly"
+                            value="${user.email}">
                     </div>
 
 
-                    <button class="myPage-submit">수정하기</button>
+                    <button class="myPage-submit" >수정하기</button>
                 </form>
 
             </section>
@@ -70,4 +76,17 @@
 <jsp:include page="../includes/footer.jsp" />
     
 </body>
+<script type="text/javascript">
+$(document).ready(function(){ /* 브라우저 시작 시 실행 */
+	var formObj = $("form"); /* 상단 코드중에 form 태그를 formObj로 관여한다. */
+	$('button').on("click", function(e){
+		e.preventDefault(); 
+		/* <form>태그의 모든 버튼은 기본적으로 submit 처리 -> 기본 동작을 막고 마지막에 직접 submit()수행 */
+		document.getElementById("nickName").readOnly=false;
+		document.getElementById("phone").readOnly=false;
+		document.getElementById("email").readOnly=false;
+		
+	});
+});
+</script>
 </html>

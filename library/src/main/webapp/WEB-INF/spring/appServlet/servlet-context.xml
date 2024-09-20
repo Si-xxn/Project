@@ -22,17 +22,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="kr.co.librarylyh.controller" />
-	
-	<interceptors>
-		<interceptor>
-			<mapping path="/library/login.do" />
-			<beans:bean id="loginInterceptor" class="kr.co.librarylyh.interceptor.LoginInterceptor"></beans:bean>
-		</interceptor>
-		<interceptor>
-			<mapping path="/admin/**"/>
-			<beans:bean id="AdminInterceptor" class="kr.co.librarylyh.interceptor.AdminInterceptor"></beans:bean>
-		</interceptor>
-	</interceptors>
+
 	
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 	</beans:bean>

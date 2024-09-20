@@ -6,11 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,26 +26,7 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @Autowired
 	private UserService service;
-    
-    
-    @GetMapping("/home")
-    public void home() {
-    }
-    
-    @GetMapping({"/ReservationMain", "/list", "/test/joinTest", "/test/loginTest"}) 
-    public void reservation() {
-    	
-    }
-    
-    @GetMapping({"/board/get", "/board/modify", "/board/register"})
-    public void board() {
-    	
-    }
-    
-    @GetMapping({"/reservation/BookReservation", "/reservation/StudyReservation", "/reservation/RsCreate"})
-    public void reservationInfo() {
-    	
-    }
+
 
     @GetMapping({"/agreementForm", "/login", "/join"})
     public void replace() {
@@ -53,9 +37,9 @@ public class UserController {
     public String join(UserVO user, HttpServletResponse response) {
 		/* log.info("회원가입 테스트"); */
     	
-    	service.login(user); // 회원가입 쿼리 실행
+    	service.join(user); // 회원가입 쿼리 실행
     	
-    	return "redirect:/library/home";
+    	return "redirect:/library/login";
     } 
     
     // 아이디 중복 검사
@@ -118,9 +102,53 @@ public class UserController {
     	return "redirect:/library/home";
     }
     
+    // 마이페이지 이동
     @GetMapping("/myPage")
-    public void myPage() {}
-
+    public String myPage() {
+    	return "/library/myPage";
+    }
+    
+    // 아이디 찾기 페이지 이동
+    @GetMapping("/findId")
+    public String findId() {return "/library/findId";}
+    
+    // 아이디 찾기 결과 페이지 이동
+    @GetMapping("/findIdResult")
+    public String findIdResult() {return "/library/findIdResult";}
+    
+/*    @PostMapping("/findIdCheck")
+    public String searchId( Model model, UserVO user,
+    						@RequestParam String name,
+    						@RequestParam String email) {
+    	user.setName(name);
+    	user.setEmail(email);
+    	
+    	UserVO findId = service.findUserId(user);
+    	
+    	model.addAttribute("findId", findId);
+    	
+    	return "library/findIdResult";
+    } */
+    
+    // 비밀번호 찾기
+    @GetMapping("/findPw")
+    public String findPw() { return "/library/findPw";}
+ 
+/*    @PostMapping("/findIdCheck")
+    public String searchPw( Model model, UserVO user,
+    						@RequestParam String id,
+    						@RequestParam String name,
+    						@RequestParam String email) {
+    	user.setId(id);
+    	user.setName(name);
+    	user.setEmail(email);
+    	
+    	UserVO findPw = service.findUserId(user);
+    	
+    	model.addAttribute("findPw", findPw);
+    	
+    	return "library/findPwResult";
+    }
     
     @GetMapping("/modify")
     public void modifyForm(HttpSession session, ModelMap map) {
@@ -135,5 +163,5 @@ public class UserController {
     public String modify(UserVO vo) {
     	service.modify(vo);
     	return "redirect:/library/user/myPage";
-    }
-}
+    }*/
+} 

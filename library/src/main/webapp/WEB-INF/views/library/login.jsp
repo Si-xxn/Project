@@ -24,20 +24,26 @@ crossorigin="anonymous"></script>
 			<div class="login_wrap"> 
 				<div class="id_wrap">
 						<div class="id_input_box">
-						<input class="id_input" name="id">
+						<input class="id_input" name="id" placeholder="ID">
 					</div>
 				</div>
 				<div class="pw_wrap">
 					<div class="pw_input_box">
-						<input class="pw_input" name="pw">
+						<input type="password" class="pw_input" name="pw" placeholder="Password">
 					</div>
 				</div>
 				<c:if test = "${result == 0}">
 				<div class="login_warn">ID 또는 Password를 잘못 입력하셨습니다.</div>
 				</c:if>
+				<c:if test = "${result == 1 }">
+				<div class="login_success">로그인 성공</div>
+				</c:if>
 				<div class="login_button_wrap">
 					<button type="button" class="login_button" >로그인</button>
-				</div>			
+					<button type="button" class="join_button" onclick="location.href='/library/agreementForm'">회원가입</button>
+					<p style="align:center;"><a href="/library/findId">아이디 찾기</a> | <a href="/library/findPw">비밀번호 찾기</a></p>
+				</div>
+						
 			</div>
 		
 		</form>
@@ -48,8 +54,10 @@ crossorigin="anonymous"></script>
 <script type="text/javascript">
 $(".login_button").click(function(){
 	/* alert("로그인"); */
-	$("#login_form").attr("action", "/library/login.do");
+	$("#login_form").attr("action", "/library/login");
 	$("#login_form").submit();
+	
+	
 });
 
 </script>

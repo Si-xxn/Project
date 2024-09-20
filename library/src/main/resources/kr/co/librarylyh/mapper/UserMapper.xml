@@ -36,44 +36,61 @@
 		]]>
 	</select>
 	
-	<!-- 어드민 리스트 -->
-	<select id="getAdminList" resultType="kr.co.librarylyh.domain.UserVO">
+	<!-- 아이디 찾기 -->
+	<select id="findUserId">
 		<![CDATA[
-			select * from member_tbl where authority > 0
+			select * from member_tbl where name = #{name} and email = #{email}
 		]]>
 	</select>
 	
-	<!--  유저 리스트 
-	<select id="getUserList" resultType="kr.co.librarylyh.domain.UserVO">
+	<!-- 비밀번호 찾기 -->
+	<select id="findUserPw" resultType="Integer">
 		<![CDATA[
-			select * from member_tbl where authority = 0
-		]]>
-	</select> -->
-	
-	<select id="read" resultType="kr.co.librarylyh.domain.UserVO" >
-		<![CDATA[
-			select * from member_tbl where id = #{id}
+			select count(*) from member_tbl where id = #{id} and name = #{name} and email = #{email}
 		]]>
 	</select>
 	
-	<insert id="admin">
+	<!-- 비밀번호 업데이트 -->
+	<update id="pwUpdate" >
 		<![CDATA[
-			insert into member_tbl (name, birth, phone, email, id, pw, authority) values(#{name}, #{birth}, #{phone}, #{email}, #{id}, #{pw}, #{authority})
-		]]>
-	</insert>
-	
-	
-	<update id="update">
-		<![CDATA[
-			update member_tbl set name = #{name}, phone = #{phone}, email = #{email}, pw = #{pw} where u_id = #{u_id}
+			update member_tbl set pw = #{pw} where id = #{id} and name = #{name} and email = #{email}
 		]]>
 	</update>
 	
-	<delete id="delete">
+	<!-- 현재 비밀번호 확인 -->
+	<select id="checkPw">
 		<![CDATA[
-			delete member_tbl where u_id = #{u_id}
-		]]>	
-	</delete>
+			select pw from member_tbl where id = #{id}
+		]]>
+	</select>
+	
+	<!-- 비밀번호 업데이트 -->
+	<update id="updatePw">
+		<![CDATA[
+			update member_tbl set pw = #{pw}
+		]]>
+	</update>
+	
+	<!-- 어드민 리스트 -->
+	<select id="getUserList" resultType="kr.co.librarylyh.domain.UserVO">
+		<![CDATA[
+			select * from member_tbl where authority = #{authority}
+		]]>
+	</select>
+	
+	<update id="adminRegister">
+		<![CDATA[
+			update member_tbl set authority = 1 where u_id = #{u_id}
+		]]>
+	</update>
+	
+	<select id="read" resultType="kr.co.librarylyh.domain.UserVO" >
+		<![CDATA[
+			select * from member_tbl where u_id = #{u_id}
+		]]>
+	</select>
+	
+
 	
 	
 </mapper>
