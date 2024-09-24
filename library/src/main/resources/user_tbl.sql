@@ -30,7 +30,7 @@ update MEMBER_TBL set authority = 0 where id ='test222';
 select * from member_tbl where authority>0;
 
 
-
+select * from member_tbl where name='test'and email='library5@naver.com';
 --------------------------------------------- 좋아요 구현 10차 시기
 create table tbl_like (
 	bno number(10,0) default 0,

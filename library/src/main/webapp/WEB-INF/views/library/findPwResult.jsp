@@ -76,7 +76,7 @@ p {
 	</div>
 		<div class="result">
 			<c:choose>
-				<c:when test="${findPw == 0 }">
+				<c:when test="${findPw == null }">
 				<p class="inquiry">조회결과가 없습니다.</p>
 				</c:when>
 				<c:otherwise>
@@ -90,7 +90,7 @@ p {
 			</c:choose>
 		</div>
 		<div class="button_wrap">
-			<button type="button" class="login_button" onclick="location.href='/library/login'" >로그인하기</button>
+			<button type="button" class="login_button" onclick="location.href='/library/login'" >비밀번호 재설정</button>
 		</div>
 	</form>	
 </body>

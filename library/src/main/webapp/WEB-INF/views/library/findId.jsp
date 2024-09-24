@@ -67,7 +67,7 @@
 </style>
 </head>
 <body>
-	<form class="findId" id="findIdForm" action="library/findIdCheck" method="post">
+	<form class="findId" id="findIdForm"  method="post" action="/library/findIdResult">
 		<div class="logo_wrap"><span>아이디 찾기</span></div>
 		<div class="name_inputBox">
 			<input type="text" name="name" id="name" class="name_input" placeholder="이름">
@@ -76,7 +76,7 @@
 			<input type="email" name="email" id="email" class="email_input" placeholder="이메일">
 		</div>
 		<div class="login_button_wrap">
-			<button type="button" class="login_button" onclick="location.href='/library/findIdCheck'" >아이디 찾기</button>
+			<button type="submit" class="login_button" >아이디 찾기</button>
 		</div>
 	</form>
 </body>

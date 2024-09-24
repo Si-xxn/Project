@@ -64,7 +64,7 @@
 	font-weight: 900;
 }
 p {
-	font-size : 18px;
+	font-size : 30px;
 	font-weight: 900;
 }
 </style>
@@ -72,13 +72,23 @@ p {
 <body>
 	<form class="result-box">
 	<div class="logo_wrap">
-		<span>회원님의 임시 비밀번호 입니다.</span>
+		<span>아이디찾기</span>
 	</div>
 		<div class="result">
-			<p>${newPw }</p>
+			<c:choose>
+				<c:when test="${findId == null }">
+				<p>조회결과가 없습니다.</p>
+				</c:when>
+				<c:otherwise>
+					<div class="pw_inputBox">
+						<p>아이디 : ${findId.id }</p>
+					</div>
+				</c:otherwise>	
+			</c:choose>
 		</div>
 		<div class="button_wrap">
 			<button type="button" class="login_button" onclick="location.href='/library/login'" >로그인하기</button>
+			<button type="button" class="login_button" onclick="location.href='/library/findPw'" >비밀번호 찾기</button>
 		</div>
 	</form>	
 </body>

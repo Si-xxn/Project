@@ -26,6 +26,7 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @Autowired
 	private UserService service;
+   
 
 
     @GetMapping({"/agreementForm", "/login", "/join"})
@@ -116,10 +117,11 @@ public class UserController {
     @GetMapping("/findIdResult")
     public String findIdResult() {return "/library/findIdResult";}
     
-/*    @PostMapping("/findIdCheck")
-    public String searchId( Model model, UserVO user,
+   @PostMapping("/findIdResult")
+    public String searchId(HttpServletRequest request, Model model, UserVO user,
     						@RequestParam String name,
     						@RequestParam String email) {
+	   log.info("lkj!@#!@#!@3"+email);
     	user.setName(name);
     	user.setEmail(email);
     	
@@ -127,41 +129,72 @@ public class UserController {
     	
     	model.addAttribute("findId", findId);
     	
+    	log.info("test" + findId);
+    	
     	return "library/findIdResult";
-    } */
+    } 
     
     // 비밀번호 찾기
     @GetMapping("/findPw")
     public String findPw() { return "/library/findPw";}
  
-/*    @PostMapping("/findIdCheck")
-    public String searchPw( Model model, UserVO user,
+    @PostMapping("/findPwResult")
+    public String searchPw(HttpServletRequest request ,Model model, UserVO user,
     						@RequestParam String id,
     						@RequestParam String name,
     						@RequestParam String email) {
     	user.setId(id);
     	user.setName(name);
     	user.setEmail(email);
+    	int search=service.findUserPw(user);
     	
-    	UserVO findPw = service.findUserId(user);
+    	if(search == 0) {
+    		model.addAttribute("msg", "기입된 정보가 잘못되었습니다. 다시 입력해주세요.");
+    	}
     	
-    	model.addAttribute("findPw", findPw);
+    	UserVO newPw = service.pwUpdate(user);
+    	
+    	model.addAttribute("newPw", newPw);
     	
     	return "library/findPwResult";
     }
     
-    @GetMapping("/modify")
-    public void modifyForm(HttpSession session, ModelMap map) {
-    	session.removeAttribute("msg");
-    	String id = (String) session.getAttribute("loginUser");
-    	
-    	UserVO vo = service.get(id);
-    	map.addAttribute("vo", vo);
-    }
+    @GetMapping("/findPwResult")
+    public void findPwResult() {}
     
-    @PostMapping("/modify")
-    public String modify(UserVO vo) {
-    	service.modify(vo);
-    	return "redirect:/library/user/myPage";
-    }*/
+    /*@GetMapping("updateForm")
+    public String updateForm(@RequestParam(value="u_id", required=false) String u_id, UserVO user, Model model) {
+    	
+    	if(u_id != null) {
+    		service.get(u_id);
+    		log.info("!@@#$%#$!"+u_id);
+    		return "redirect:/library/myPage/updateForm";
+    	}
+    	return "/library/myPage/";
+    } */
+    
+    /*@PostMapping("updateForm")
+    public String update(HttpServletRequest request ,Model model, UserVO user,
+    						@RequestParam String u_id,
+    						@RequestParam String name,
+    						@RequestParam String phone,
+    						@RequestParam String email) {
+    	user.setU_id(u_id);
+    	UserVO userInfo = service.get(u_id);
+    	
+    	if(userInfo == null) {
+    		return "/library/myPage";
+    	}
+    	user.setName(name);
+    	user.setPhone(phone);
+    	user.setEmail(email);
+    	UserVO update = user;
+    	service.updateUser(update);
+    	
+    	return "/library/myPage";
+    	
+    } */
+    
+    
+    
 } 

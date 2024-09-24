@@ -37,7 +37,7 @@
 	</select>
 	
 	<!-- 아이디 찾기 -->
-	<select id="findUserId">
+	<select id="findUserId" resultType="kr.co.librarylyh.domain.UserVO">
 		<![CDATA[
 			select * from member_tbl where name = #{name} and email = #{email}
 		]]>
@@ -71,6 +71,13 @@
 		]]>
 	</update>
 	
+	<!-- 회원정보 수정 -->
+	<update id="update" >
+		<![CDATA[
+			update member_tbl set nickName = #{nickName}, phone = #{phone}, email = #{email} where id = #{id}
+		]]>
+	</update>
+	
 	<!-- 어드민 리스트 -->
 	<select id="getUserList" resultType="kr.co.librarylyh.domain.UserVO">
 		<![CDATA[
@@ -86,7 +93,7 @@
 	
 	<select id="read" resultType="kr.co.librarylyh.domain.UserVO" >
 		<![CDATA[
-			select * from member_tbl where u_id = #{u_id}
+			select * from member_tbl where id = #{id}
 		]]>
 	</select>
 	
