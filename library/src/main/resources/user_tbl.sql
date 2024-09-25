@@ -26,9 +26,9 @@ select * from member_tbl where id = 'test555' and pw = 'test55';
 
 select u_id, name, birth, phone, email, id, pw, nickName from member_tbl where id = 'test555' and pw = 'test55';
 
-update MEMBER_TBL set authority = 0 where id ='test222';
+update MEMBER_TBL set authority = 1 where id ='admin123';
 select * from member_tbl where authority>0;
-
+update member_tbl set nickName = '제발', phone = '010-1111-1111', email = 'library@naver.com' where id = 'test';
 
 select * from member_tbl where name='test'and email='library5@naver.com';
 --------------------------------------------- 좋아요 구현 10차 시기
