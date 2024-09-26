@@ -42,11 +42,10 @@ public class BoardServiceImpl implements BoardService {
 		if (board.getAttachList() == null || board.getAttachList().size() <= 0) {
 			return;
 		}
-
-		board.getAttachList().forEach(attach -> {
-
+		board.getAttachList().forEach(attach -> { // 첨부파일 이름 및 경로 첨부파일_테이블에 저장
 			attach.setBno(board.getBno());
 			attachMapper.insert(attach);
+			attachMapper.insertBoard(attach); // 첨부파일 이름 및 경로 게시글_테이블에 저장
 		});
 	}
 
@@ -84,7 +83,7 @@ public class BoardServiceImpl implements BoardService {
 
 				attach.setBno(board.getBno());
 				attachMapper.insert(attach);
-			});
+			}); // end if 
 		}
 
 		return modifyResult;
@@ -114,38 +113,47 @@ public class BoardServiceImpl implements BoardService {
 		log.info("get total count");
 		return mapper.getTotalCount(cri);
 	}
-
-	@Override // 첨부파일 관련 
+	
+	// 첨부파일 관련 
+	@Override 
 	public List<BoardAttachVO> getAttachList(Long bno) {
 
 		log.info("get Attach list by bno" + bno);
 		return attachMapper.findByBno(bno);
 	}
-
+	
+	// 게시글 좋아요 관련
+	
 	@Override
-	public LikeVO serviceCheckLike(Long bno) {
+	public LikeVO serviceCheckLike(Long bno) {  // 게시글 좋아요 여부
 		// TODO Auto-generated method stub
 		
 		return mapper.checkLike(bno);
 	}
 
+
 	@Override
-	public void serviceInsertLike(String userId, Long bno) {
+	public void serviceInsertLike(String likeUserId, Long bno) throws Exception { // 게시글 좋아요 (좋아요 상승)
 		// TODO Auto-generated method stub
-		mapper.insertLike(userId, bno);
+		mapper.boardLikeNumUp(bno); // 해당 메서드 실행 하여 조회수 증가
+		
+		mapper.insertLike(likeUserId, bno);
 	}
 
 	@Override
-	public int serviceDeleteLike(LikeVO likeVO) {
+	public int serviceDeleteLike(String likeUserId, Long bno) throws Exception { // 게시글 좋아요 (좋아요 하락)
 		// TODO Auto-generated method stub
-		return mapper.deleteLike(likeVO);
+		mapper.boardLikeNumDown(bno);
+		return mapper.deleteLike(likeUserId, bno);
 	}
 
-	@Override
+
+
+	/*@Override
 	public int serviceCountLike(Long bno) {
 		// TODO Auto-generated method stub
 		return mapper.countLike(bno);
-	}
+	}*/
 	
 
 }

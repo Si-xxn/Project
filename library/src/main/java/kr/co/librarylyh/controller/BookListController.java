@@ -1,7 +1,6 @@
 package kr.co.librarylyh.controller;
 
 import kr.co.librarylyh.domain.BookListVO;
-import kr.co.librarylyh.domain.CategoryVO;
 import kr.co.librarylyh.domain.Paging;
 import kr.co.librarylyh.service.BookListService;
 import lombok.AllArgsConstructor;
@@ -23,48 +22,57 @@ import java.util.Map;
 @AllArgsConstructor
 public class BookListController {
 
-	private BookListService service;
+   private BookListService service;
 
-	@GetMapping("/booklist")
-	public String booklist(
-			@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
-			@RequestParam(value = "amount", defaultValue = "10") int amount,
-			@RequestParam(value = "category_id", required = false) String category_id,
-			@RequestParam(value = "rentalAvailable", required = false) String rentalAvailable,
-			@RequestParam(value = "publicationDateFilter", required = false) String publicationDateFilter,
-			Model model) {
+   @GetMapping("/booklist")
+   public String booklist(
+         @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+         @RequestParam(value = "amount", defaultValue = "10") int amount,
+         @RequestParam(value = "categoryId", required = false) String categoryId,
+         @RequestParam(value = "rentalAvailable", required = false) String rentalAvailable,
+         @RequestParam(value = "publicationDateFilter", required = false) String publicationDateFilter,
+         Model model) {
 
-		Paging pge = new Paging(pageNum, amount);
-		Map<String, Object> searchParams = new HashMap<>();
+      Paging pge = new Paging(pageNum, amount);
+      Map<String, Object> searchParams = new HashMap<>();
 
-		// 필터 조건이 있을 경우에만 searchParams에 추가 (필터 설정 안할때 URL 난장판되길래 만듦)
-		if (category_id != null && !category_id.isEmpty()) {
-			searchParams.put("category_id", category_id);
-		}
-		if (rentalAvailable != null && !rentalAvailable.isEmpty()) {
-			searchParams.put("rentalAvailable", rentalAvailable);
-		}
-		if (publicationDateFilter != null && !publicationDateFilter.isEmpty()) {
-			searchParams.put("publicationDateFilter", publicationDateFilter);
-		}
+      // 필터 조건이 있을 경우에만 searchParams에 추가 (필터 설정 안할때 URL 난장판되길래 만듦)
+      if (categoryId != null && !categoryId.isEmpty()) {
+         searchParams.put("categoryId", categoryId);
+      }
+      if (rentalAvailable != null && !rentalAvailable.isEmpty()) {
+         searchParams.put("rentalAvailable", rentalAvailable);
+      }
+      if (publicationDateFilter != null && !publicationDateFilter.isEmpty()) {
+         searchParams.put("publicationDateFilter", publicationDateFilter);
+      }
 
-		// 기본 검색 조건에 맞는 모든 책 목록 가져오기
-		List<BookListVO> bookList = service.getListWithFiltersAndPaging(pge, searchParams);
-		model.addAttribute("bookList", bookList);
-		return "library/booklist"; // 책 목록 뷰로 이동
-	}
-
-
-	@GetMapping("/read/{isbn13}")
-	public String read(@PathVariable("isbn13") Long isbn13, Model model) {
-		BookListVO bookDetail = service.get(isbn13);
-		model.addAttribute("bookDetail", bookDetail);
-		List<CategoryVO> categories = service.getCategoriesByISBN(isbn13);
-		model.addAttribute("categories", categories);
+      // 기본 검색 조건에 맞는 모든 책 목록 가져오기
+      List<BookListVO> bookList = service.getListWithFiltersAndPaging(pge, searchParams);
+      model.addAttribute("bookList", bookList);
+      return "library/booklist"; // 책 목록 뷰로 이동
+   }
 
 
+   @GetMapping("/read/{isbn13}")
+   public String read(@PathVariable("isbn13") Long isbn13, Model model) {
+      BookListVO bookDetail = service.get(isbn13);
+      model.addAttribute("bookDetail", bookDetail);
+      return "library/bookDetail"; // 책 상세 보기 뷰로 이동
+   }
 
-		return "library/bookDetail"; // 책 상세 보기 뷰로 이동
-	}
+   @GetMapping("/manage")
+   public String manageBook(@RequestParam(value = "isbn13", required = false) Long isbn13,
+         @RequestParam("mode") String mode, Model model) {
+      log.info("Mode: " + mode);
+      log.info("ISBN13: " + isbn13);
 
+      if ("edit".equals(mode) && isbn13 != null) {
+         BookListVO bookDetail = service.get(isbn13);
+         log.info("Book Detail: " + bookDetail);  // 책 정보를 로그로 확인
+         model.addAttribute("bookDetail", bookDetail);
+      }
+      model.addAttribute("mode", mode);
+      return "library/bookManagement";
+   }
 }

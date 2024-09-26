@@ -47,9 +47,9 @@
 </div>
 
 <div class="form-group">
-  <label>닉네임</label> 
+  <label>Writer</label> 
   <input class="form-control" name='writer'
-    value='<c:out value="${board.nickName}"/>' readonly="readonly">            
+    value='<c:out value="${board.writer}"/>' readonly="readonly">            
 </div>
 
 <div class="form-group">
@@ -378,4 +378,10 @@ $(document).ready(function() {
 });
 
 </script>
+
+  
+
+
+
+
 <%@include file="../../includes/footer.jsp"%>

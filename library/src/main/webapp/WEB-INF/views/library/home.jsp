@@ -60,7 +60,7 @@
 							<img src="/resources/images/book_log.png" >
 							<div class="hero_box_content">
 								<h2 class="hero_box_title">도서 전체 목록</h2>
-								<a href="courses.html" class="hero_box_link">view more</a>
+								<a href="/library/booklist" class="hero_box_link">view more</a>
 							</div>
 						</div>
 					</div>

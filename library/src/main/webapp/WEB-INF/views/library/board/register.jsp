@@ -5,8 +5,7 @@
 <%@include file="../../includes/header.jsp"%>
 <link rel="stylesheet" type="text/css" href="/resources/styles/news_styles.css">
 <link rel="stylesheet" type="text/css" href="/resources/styles/news_responsive.css">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 <style>
 /* 게시판 아이콘 */
@@ -112,25 +111,11 @@
       <!-- /.panel-heading -->
       <div class="panel-body">
       
-      	<% /* 로그인 객체가 세션으로 들어오면 nickName 만 받아오기 위함. 아래 내용은 수정 되어야함 */
+      	<%-- <% /* 로그인 객체가 세션으로 들어오면 nickName 만 받아오기 위함. 아래 내용은 수정 되어야함 */
     		String nickName = (String) session.getAttribute("nickName");
-		%>
-		
+		%> --%>
 
-		
         <form role="form" action="/board/register" method="post">
-        	<div class="form-group">
-        		<label>닉네임</label> 
-        		<input class="form-control" name='nickName' value="${user.nickName}" readonly>
-    	 	</div>
-        	<div class="input-group mb-3">
-  			<label class="input-group-text" for="inputGroupSelect01">카테고리</label>
-  			<select class="form-select" id="inputGroupSelect01">
-    			<option selected>선택</option>
-    			<option value="1">자유</option>
-    			<option value="2">Q&A</option>
-  			</select>
-		</div>	
           <div class="form-group">
             <label>제목</label> <input class="form-control" name='title' placeholder="제목을 입력해주세요.">
           </div>
@@ -139,7 +124,18 @@
             <label>내용</label>
             <textarea class="form-control" rows="3" name='content' placeholder="내용을 입력해주세요."></textarea>
           </div>
-    
+
+          <div class="form-group">
+            <label>카테고리</label> <input class="form-control" name='category' placeholder="카테고리를 입력해주세요." >
+          </div>
+    	  
+          <div class="form-group">
+        	<label>닉네임</label> 
+        	<input class="form-control" name='nickName' value="${user.nickName }" readonly>
+    	  </div>
+    	  
+          <button type="submit" class="btn btn-default">작성</button>
+          <button type="reset" class="btn btn-default">초기화</button>
         </form>
 
       </div>
@@ -156,21 +152,23 @@
   <div class="col-lg-12">
     <div class="panel panel-default">
 
-      <div class="panel-heading"></div>
+      <div class="panel-heading">File Attach</div>
       <!-- /.panel-heading -->
-      	<label>파일업로드(선택)</label>
-      	<div class="input-group mb-3">
- 			<input type="file" class="form-control" id="inputGroupFile01">
-		</div>
+      <div class="panel-body">
+        <div class="form-group uploadDiv">
+            <input type="file" name='uploadFile' multiple>
+        </div>
         
         <div class='uploadResult'> 
           <ul>
+          
           </ul>
         </div>
-        <div align="center" style="padding-bottom:20px;">
-        	<button type="submit" class="btn btn-primary">등록</button>
-          	<button type="reset" class="btn btn-secondary">초기화</button>
-        </div>
+        
+        
+      </div>
+      <!--  end panel-body -->
+
     </div>
     <!--  end panel-body -->
   </div>
@@ -193,7 +191,7 @@
 						<p class="about_text">*게시글 작성 시 유의사항 개인적인 친분의 수준을 넘어선 과도한 비방, 음담패설, 도배, 근거 없는 사실 유포 이외 기타 악성 게시글들을 엄격히 금지하며, 위 항목에 해당하는 댓글 역시 철저히 금지합니다.
 위와 같은 게시글/댓글은 경고없이 삭제되며, 작성자는 경고없이 탈퇴될 수 있습니다.<br>*규정에 어긋난 심한 욕설로 삭제 처리되며 지속적으로 남겨주실 경우 탈퇴처리 될 수 있으니 유의바랍니다.</p>
 
-<!-- 						<div class="contact_info">
+						<div class="contact_info">
 							<ul>
 								<li class="contact_info_item">
 									<div class="contact_info_icon">
@@ -213,7 +211,7 @@
 									</div>hello@company.com
 								</li>
 							</ul>
-						</div> -->
+						</div>
 
 					</div>
 				</div>

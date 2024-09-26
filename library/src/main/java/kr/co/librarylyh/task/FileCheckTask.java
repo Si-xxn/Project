@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import kr.co.librarylyh.domain.BoardAttachVO;
 import kr.co.librarylyh.mapper.BoardAttachMapper;
 import lombok.Setter;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2

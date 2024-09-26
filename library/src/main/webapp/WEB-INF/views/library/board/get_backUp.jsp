@@ -3,16 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@include file="../../includes/header.jsp"%>
-<link rel="stylesheet" type="text/css" href="/resources/styles/news_styles.css">
-<link rel="stylesheet" type="text/css" href="/resources/styles/news_responsive.css">
-
-
 
 	<!-- Home -->
 
 	<div class="home">
 		<div class="home_background_container prlx_parent">
-			<div class="home_background prlx" style="background-image:url(/resources/images/news_background.jpg)"></div>
+			<div class="home_background prlx" style="background-image:url(../resources/images/news_background.jpg)"></div>
 		</div>
 		<div class="home_content">
 			<h1>The News</h1>
@@ -73,7 +69,6 @@
   width:600px;
 }
 
-
 </style>
 
 
@@ -89,65 +84,94 @@
 
 				<div class="col-lg-8">
 					
-					<div class="news_posts">		
+					<div class="news_posts">
 					
-					<!-- 이미지 나오던 곳 -->
-												<!-- 업로드한 이미지가 들어가는 장소 -->
-						<div class="news_post">
+					
+					
+					<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
 
-																								<div class='uploadResult'> 
-         									 <ul>
-         									 </ul>
-											</div>
-								
-						
-							
-							
-						<div class="news_post">
-							<div class="news_post_image">
-								
-							</div>
-							<div class="news_post_top d-flex flex-column flex-sm-row">
-								<div class="news_post_date_container">
-									<div class="news_post_date d-flex flex-column align-items-center justify-content-center">
-										<div><c:out value="${board.bno }"/></div>
-										<div>글번호</div>
-									</div>
-								</div>
-								<div class="news_post_title_container">
-									<div class="news_post_title">
-										<h1><c:out value="${board.title }"/></h1>
-									</div>
-									<div class="news_post_meta">
-										<span class="news_post_comments">작성자</span>
-										<span>|</span>
-										<span class="news_post_author"><c:out value="${board.nickName}"/></span>
-										<span>|</span>
-										<span class="news_post_comments"><c:out value="${board.regdate}"/></span>
-									</div>
-								</div>
-							</div>
-							<div class="news_post_text">
-								<p><c:out value="${board.content}" /></p>
-						</div>
-							
-							
-							<button data-oper='modify' class="btn btn-default">글수정</button>
-							<button data-oper='list' class="btn btn-info">목록</button>
-							
+      <div class="panel-heading">첨부이미지</div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+        
+        <div class='uploadResult'> 
+          <ul>
+          </ul>
+        </div>
+      </div>
+      <!--  end panel-body -->
+    </div>
+    <!--  end panel-body -->
+  </div>
+  <!-- end panel -->
+</div>
+<!-- /.row -->
+
+
+
+
+		
+		
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+          <div class="form-group">
+          <label>Bno</label> <input class="form-control" name='bno'
+            value='<c:out value="${board.bno }"/>' readonly="readonly">
+        </div>
+
+        <div class="form-group">
+          <label>Title</label> <input class="form-control" name='title'
+            value='<c:out value="${board.title }"/>' readonly="readonly">
+        </div>
+
+        <div class="form-group">
+          <label>Text area</label>
+          <textarea class="form-control" rows="3" name='content'
+            readonly="readonly"><c:out value="${board.content}" /></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>닉네임</label> <input class="form-control" name='nickName'
+            value='<c:out value="${board.nickName}"/>' readonly="readonly">
+        </div>
+
+
+<button data-oper='modify' class="btn btn-default">글수정</button>
+<button data-oper='list' class="btn btn-info">목록</button>
+
+
+<form id='operForm' action="/boad/modify" method="get">
+  <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
+  <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
+  <input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
+  <input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
+  <input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>  
+</form>
+
+      </div>
+      <!--  end panel-body -->
+    </div>
+    <!--  end panel-body -->
+  </div>
+  <!-- end panel -->
+</div>
+<!-- /.row -->
+
 <div class='row'>
 
   <div class="col-lg-12">
 
     <!-- /.panel -->
     <div class="panel panel-default">
-<!--       <div class="panel-heading">
-        <i class="fa fa-comments fa-fw"></i> Reply
-      </div> -->
-      
       <div class="panel-heading">
-        <i class="fa fa-comments fa-fw"></i> Reply
-        <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New Reply</button>
+        <i class="fa fa-comments fa-fw"></i> 댓글
+        <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>댓글 작성</button>
       </div>      
       
       
@@ -168,32 +192,45 @@
   </div>
   <!-- ./ end row -->
 </div>
-		
-								
+					
+					
+					
+						<!-- News Post -->
+						<div class="news_post">
+							<div class="news_post_image">
+								<img src="../resources/images/news_1.jpg" alt="https://unsplash.com/@dsmacinnes">
+							</div>
+							<div class="news_post_top d-flex flex-column flex-sm-row">
+								<div class="news_post_date_container">
+									<div class="news_post_date d-flex flex-column align-items-center justify-content-center">
+										<div>18</div>
+										<div>dec</div>
+									</div>
+								</div>
+								<div class="news_post_title_container">
+									<div class="news_post_title">
+										<a href="news_post.html">Why do you need a qualification?</a>
+									</div>
+									<div class="news_post_meta">
+										<span class="news_post_author"><a href="#">By Christian Smith</a></span>
+										<span>|</span>
+										<span class="news_post_comments"><a href="#">3 Comments</a></span>
+									</div>
+								</div>
+							</div>
+							<div class="news_post_text">
+								<p>In aliquam, augue a gravida rutrum, ante nisl fermentum nulla, vitae tempor nisl ligula vel nunc. Proin quis mi malesuada, finibus tortor fermentum. Etiam eu purus nec eros varius luctus. Praesent finibus risus facilisis ultricies.</p>
+							</div>
+							<div class="news_post_button text-center trans_200">
+								<a href="news_post.html">Read More</a>
+							</div>
 						</div>
 
 					</div>
-					
 				</div>
-				
 			</div>
-			
 		</div>
-	
 	</div>
-</div>
-	
-<form id='operForm' action="/boad/modify" method="get">
-  <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
-  <input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
-  <input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
-  <input type='hidden' name='keyword' value='<c:out value="${cri.keyword}"/>'>
-  <input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>  
-</form>
-	
-
-	
-	
 	
 	
 	
@@ -271,13 +308,13 @@ $(document).ready(function () {
          if(list == null || list.length == 0){
            return;
          }
-         //댓글 작성되면 나오는 칸 관련
+         // 댓글입력 관련
          for (var i = 0, len = list.length || 0; i < len; i++) {
            str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
-           str +="  <div class='replyBox'><strong class='primary-font'>["
+           str +="  <div><div class='header'><strong class='primary-font'>["
         	   +list[i].rno+"] "+list[i].replyer+"</strong>"; 
            str +="    <small class='pull-right text-muted'>"
-               +replyService.displayTime(list[i].replyDate)+"</small>";
+               +replyService.displayTime(list[i].replyDate)+"</small></div>";
            str +="    <p>"+list[i].reply+"</p></div></li>";
          }
          
@@ -621,8 +658,6 @@ $(document).ready(function(){
            str += "<img src='/display?fileName="+fileCallPath+"'>";
            str += "</div>";
            str +"</li>";
-        
-           
          }else{
              
            str += "<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"' ><div>";
